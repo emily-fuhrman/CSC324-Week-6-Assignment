@@ -2,12 +2,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
+ * by: Emily Fuhrman
  * A simple To-Do List application that allows users to:
  * 1. Add tasks
  * 2. View tasks
  * 3. Remove tasks
  * 4. Exit the program
- *
+ * <p>
  * Uses an ArrayList to store tasks and Scanner for user input.
  */
 public class ToDoListApp {
@@ -26,6 +27,7 @@ public class ToDoListApp {
             System.out.println("2. View Tasks");
             System.out.println("3. Remove Task");
             System.out.println("4. Exit");
+            System.out.println("5. Remove all Tasks");
             System.out.print("Enter choice: ");
 
             // Read user input (menu choice)
@@ -38,6 +40,7 @@ public class ToDoListApp {
                 case 2 -> viewTasks(); // Call method to display tasks
                 case 3 -> removeTask(scanner); // Call method to remove a task
                 case 4 -> System.out.println("Exiting..."); // Exit message
+                case 5 -> removeAllTask(scanner);
                 default -> System.out.println("Invalid choice. Try again."); // Handle invalid input
             }
         } while (choice != 4); // Loop until user selects option 4 (Exit)
@@ -45,8 +48,18 @@ public class ToDoListApp {
         scanner.close(); // Close scanner to prevent memory leaks
     }
 
+    // Method to remove all tasks in list
+    private static void removeAllTask(Scanner scanner) {
+        viewTasks(); // Show current tasks before asking for input
+        if (tasks.isEmpty()) return; // If no tasks, exit method
+
+        tasks.clear();
+    }
+
+
     /**
      * Method to add a new task to the list.
+     *
      * @param scanner Scanner object for user input.
      */
     private static void addTask(Scanner scanner) {
@@ -73,6 +86,7 @@ public class ToDoListApp {
 
     /**
      * Method to remove a task from the list.
+     *
      * @param scanner Scanner object for user input.
      */
     private static void removeTask(Scanner scanner) {
@@ -84,10 +98,13 @@ public class ToDoListApp {
 
         // Validate the task number before removing
         if (index > 0 && index <= tasks.size()) {
-            tasks.remove(index - 1); // Remove task (index is 1-based, ArrayList is 0-based)
-            System.out.println("Task removed."); // Confirmation message
+            tasks.clear(); // Remove task (index is 1-based, ArrayList is 0-based)
+            System.out.println("All tasks removed."); // Confirmation message
         } else {
             System.out.println("Invalid task number."); // Handle invalid input
         }
     }
 }
+
+
+
